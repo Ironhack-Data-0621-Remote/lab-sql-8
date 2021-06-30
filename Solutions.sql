@@ -3,14 +3,14 @@ USE	 sakila;
 -- 1. Rank films by length (filter out the rows that have nulls or 0s in length column). In your output, only select the columns title, length, and the rank.
 SELECT title, length, RANK() OVER(ORDER BY length DESC) AS length_rank
 FROM film
-WHERE length IS NOT NULL AND length > 0
+WHERE length IS NOT NULL OR length > 0
 ORDER BY length_rank;
 
 -- 2. Rank films by length within the rating category (filter out the rows that have nulls or 0s in length column). 
 -- In your output, only select the columns title, length, rating and the rank.
 SELECT title, rating, length, RANK() OVER(PARTITION BY rating ORDER BY length DESC) AS length_rank
 FROM film
-WHERE length IS NOT NULL AND length > 0
+WHERE length IS NOT NULL OR length > 0
 ORDER BY rating, length_rank;
 
 -- 3. How many films are there for each of the categories in the category table. Use appropriate join to write this query.
